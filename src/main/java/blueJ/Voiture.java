@@ -67,6 +67,6 @@ public class Voiture
     {
         // Insérez votre code ici
         return (this.qtCarburantRestant+quantite<= this.capacite && 
-               this.qtCarburantRestant+quantite >= 0);
+               quantite >= 0);
     }
 }

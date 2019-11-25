@@ -12,9 +12,9 @@ Afin de pouvoir payer le pompiste selon la quantité de carburant ajoutée.
     Then la <quantiteAjoutee> de carburant est automatique calcule
     
    Examples: 
-      | voiture  | quantiteInitiale | quantiteAjoutee |
-      | voiture1 |     60            | 40 							|
-      | voiture2 |     50 					 | 50               |
+      | quantiteInitiale | quantiteAjoutee |
+      |     60            | 40 							|
+      |     50 					 | 50               |
 
   @tag2
   Scenario Outline:  Calcul quantite fuel a mettre dans la voiture lorsque quantite initiale invalide
@@ -23,6 +23,6 @@ Afin de pouvoir payer le pompiste selon la quantité de carburant ajoutée.
     Then la <quantiteAjoutee> de carburant est automatique calcule avec quantite initiale est egale a zero
 
      Examples: 
-      | voiture  | quantiteInitiale | quantiteAjoutee |
-      | voiture1 |     -2            | 100							|
-      | voiture2 |     200					 | 100              |
+      | quantiteInitiale | quantiteAjoutee |
+      |     -2            | 100							|
+      |     200					 | 100              |
