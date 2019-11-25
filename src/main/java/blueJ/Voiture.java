@@ -24,7 +24,7 @@ public class Voiture
     {
         // initialisation des variables d'instance
         this.capacite = 100;
-        if(qtCarburantRestant >=0 && qtCarburantRestant <= this.capacite) { this.qtCarburantRestant = qtCarburantRestant; } else { this.qtCarburantRestant =0;}
+        this.qtCarburantRestant =  (qtCarburantRestant >=0 && qtCarburantRestant <= this.capacite) ?  qtCarburantRestant : 0;
         this.conducteur = null;
         
     }

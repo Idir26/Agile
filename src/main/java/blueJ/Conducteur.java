@@ -8,7 +8,7 @@ package blueJ;
  */
 public class Conducteur
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    // variables d'instance - remplacez l'exemple qui suit par le votre
     
     
     public Voiture voiture; 
