@@ -8,12 +8,11 @@ import java.util.ArrayList;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Medecin extends Personne
+public class Medecin  extends Personne  implements Observer<Medecin>, Container
 {
     // instance variables - replace the example below with your own
-    private String nom;
-    private String prenom;
-    private ArrayList<Personne> patients;
+   
+    protected ArrayList<Personne> patients;
 
     /**
      * Constructor for objects of class Medecin
@@ -29,13 +28,48 @@ public class Medecin extends Personne
         if(patient.getPointDeVie() + pointDeVie <= 100){
             patient.setPointDeVie(patient.getPointDeVie() + pointDeVie);
         }
-        if(patient.getPointDeVie() == 100){
-            patient.setMalade(false);
-        }
+        
         return patient.getPointDeVie();
     }
     
     public void ajoutPatient(Personne p){
     	this.patients.add(p);
     }
-}
+
+	public void update(Personne personne) {
+		patients.remove(personne);
+		
+	}
+	
+	public void getAllPatients(){
+    	for(Iterator iter = this.getIterator(); iter.hasNext();){
+	         Personne p = (Personne) iter.next();
+	         this.guerir(p, 100-p.getPointDeVie()); //remet les points de vie a 100 (guerir)
+	     } 
+    }
+    
+    public Iterator getIterator() {
+       return new NameIterator();
+    }
+
+    private class NameIterator implements Iterator {
+
+       int index;
+
+       public boolean hasNext() {
+       
+          if(index < patients.size()){
+             return true;
+          }
+          return false;
+       }
+
+       
+       public Object next() {
+       
+          if(this.hasNext()){
+             return patients.get(index++);
+          }
+          return null;
+       }		
+    }}

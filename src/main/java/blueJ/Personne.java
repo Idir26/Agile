@@ -1,6 +1,8 @@
 package blueJ;
 
-public class Personne {
+import java.util.*;
+
+public class Personne implements Observable<Personne> {
 	
 	    public Voiture voiture; 
 	    private String nom;
@@ -8,6 +10,7 @@ public class Personne {
 	    private int pointDeVie = 100;
 	    private boolean malade = false;
 	    private Medecin medecinTraitant;
+	    private List<Observer<Medecin>> observers = new ArrayList<Observer<Medecin>>();
 	    
 	    /**
 	     * Constructeur d'objets de classe Personne
@@ -70,6 +73,11 @@ public class Personne {
 	    
 	    public void setPointDeVie(int p){
 	        this.pointDeVie = p;
+	        
+	        if(this.pointDeVie == 100){
+	            this.setMalade(false);
+	            this.medecinTraitant.notifyObservers();
+	        }
 	    }
 	    
 	    public Medecin getMedecinTraitant(){
@@ -78,6 +86,7 @@ public class Personne {
 	    
 	    public void setMalade(boolean b){
 	        this.malade = b;
+	       
 	    }
 	    
 	    public int tomberMalade(int pointDeMaladie){
@@ -86,16 +95,27 @@ public class Personne {
 	    	}else{
 	    		this.pointDeVie = 0;
 	    	}
+	    	this.medecinTraitant.patients.add(this);
 	        this.malade = true;
 	        return this.pointDeVie;
 	    }
 	    
-	    public boolean ajoutMedecinTraitant(Medecin m){
-	    	if(medecinTraitant == null){
+	    public void ajoutMedecinTraitant(Medecin m){
+	    
 	    		this.medecinTraitant = m;
-	    		m.ajoutPatient(this);
-	    		return true;
-	    	}
-	    	return false;
+
 	    }
-}
+
+		public void addObserver(Observer<Medecin> observer) {
+			observers.add(observer);
+			
+		}
+
+		public void notifyObservers() {
+			for (Observer<Medecin> observer : observers) {
+				observer.update(this);
+			}
+		}
+			
+		}
+

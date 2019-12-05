@@ -116,14 +116,6 @@ public class TestPersonne
         assertEquals(90, patient2.tomberMalade(10));
     }
     
-    @Test
-    public void testAjoutMedecinTraitant(){
-    	
-        
-        patient1.ajoutMedecinTraitant(medecin1);
-        assertEquals(medecin1, patient1.getMedecinTraitant());
-    }
-    
-    /**/
+   
 }
 
