@@ -1,22 +1,12 @@
 package blueJ;
 
-/**
- * Décrivez votre classe Voiture ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
 public class Voiture
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    // variables d'instance - remplacez l'exemple qui suit par le v�tre
     private float capacite;
     private float qtCarburantRestant;
-    private Conducteur conducteur;
+    private Personne conducteur;
    
-   
-   
-    
-
     /**
      * Constructeur d'objets de classe Voiture
      */
@@ -29,15 +19,15 @@ public class Voiture
         
     }
     
-    public void setConducteur(Conducteur conducteur) {
+    public void setConducteur(Personne conducteur) {
 		this.conducteur = conducteur;
 	}
 
-	public Conducteur getConducteur(){
+	public Personne getConducteur(){
         return this.conducteur;
     }
     
-    public void setCapacite(Conducteur conducteur){
+    public void setCapacite(Personne conducteur){
          this.conducteur = conducteur;
     }
     
@@ -57,16 +47,9 @@ public class Voiture
         this.qtCarburantRestant = qtCarburantRestant;
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
+    
     public boolean ajouterCarb(int quantite)
     {
-        // Insérez votre code ici
-        return (this.qtCarburantRestant+quantite<= this.capacite && 
-               quantite >= 0);
+        return (this.qtCarburantRestant+quantite<= this.capacite && quantite >= 0);
     }
 }

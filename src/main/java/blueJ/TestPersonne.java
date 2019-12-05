@@ -30,12 +30,15 @@ import org.junit.Test;
  * qui réalise les engagements, et suivi d'un appel à tearDown(), qui les
  * détruit.
  */
-public class TestConducteur
+public class TestPersonne
 {
     private Voiture clio;
     private Voiture ferrari;
-    private Conducteur idir;
-    private Conducteur charly;
+    private Personne idir;
+    private Personne charly;
+    private Personne patient1;
+    private Personne patient2;
+    private Medecin medecin1;
 
     // Définissez ici les variables d'instance nécessaires à vos engagements;
     // Vous pouvez également les saisir automatiquement du présentoir
@@ -48,7 +51,7 @@ public class TestConducteur
     /**
      * Constructeur de la classe-test TestConducteur
      */
-    public TestConducteur()
+    public TestPersonne()
     {
     }
 
@@ -61,10 +64,15 @@ public class TestConducteur
     public void setUp() // throws java.lang.Exception
     {
         clio = new Voiture(55);
-        idir = new Conducteur(clio);
+        idir = new Personne(clio, "idir", "houmel");
         
         ferrari = new Voiture(20);
-        charly = new Conducteur(ferrari);
+        charly = new Personne(ferrari, "charly", "simonian");
+        
+        patient2 = new Personne("c", "c");
+        patient1 = new Personne("Harb", "Cedric");
+        medecin1 = new Medecin("Messali", "Nassim");
+        
    
 
     }
@@ -99,6 +107,21 @@ public class TestConducteur
     public void faireLePleinTest()
     {
     	assertEquals(45, idir.faireLePlein(), 0.1);
+    }
+    
+    @Test
+    public void testTomberMalade()
+    {
+       
+        assertEquals(90, patient2.tomberMalade(10));
+    }
+    
+    @Test
+    public void testAjoutMedecinTraitant(){
+    	
+        
+        patient1.ajoutMedecinTraitant(medecin1);
+        assertEquals(medecin1, patient1.getMedecinTraitant());
     }
     
     /**/

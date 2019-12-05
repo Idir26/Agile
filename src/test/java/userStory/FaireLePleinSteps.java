@@ -4,18 +4,19 @@ import cucumber.api.java.en.*;
 
 import static org.junit.Assert.assertEquals;
 
-import blueJ.Conducteur;
+
+import blueJ.Personne;
 import blueJ.Voiture;
 
 
 public class FaireLePleinSteps {
 	private Voiture voiture;
-	private Conducteur conducteur;
+	private Personne conducteur;
 	private float res;
 	@Given("{int} de carburant")
 	public void de_carburant(Integer int1) {
 		this.voiture = new Voiture(int1);
-		this.conducteur = new Conducteur(this.voiture);
+		this.conducteur = new Personne(this.voiture, "toto", "titi");
 	  
 	}
 

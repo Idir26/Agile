@@ -42,4 +42,4 @@ Afin de prévoir la quantité à ajouter pour faire le plein.
     Examples: 
       | quantiteInitiale  | quantite| 
       |     60            |   -6    | 
-      |     50					   |    55   | 
+      |     50					  |    55   | 
