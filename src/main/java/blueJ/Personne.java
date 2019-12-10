@@ -10,7 +10,7 @@ public class Personne implements Observable<Personne> {
 	    private int pointDeVie = 100;
 	    private boolean malade = false;
 	    private Medecin medecinTraitant;
-	    private List<Observer<Medecin>> observers = new ArrayList<Observer<Medecin>>();
+	    protected List<Medecin> observers = new ArrayList<Medecin>();
 	    
 	    /**
 	     * Constructeur d'objets de classe Personne
@@ -71,14 +71,7 @@ public class Personne implements Observable<Personne> {
 	        return this.pointDeVie;
 	    }
 	    
-	    public void setPointDeVie(int p){
-	        this.pointDeVie = p;
-	        
-	        if(this.pointDeVie == 100){
-	            this.setMalade(false);
-	            this.medecinTraitant.notifyObservers();
-	        }
-	    }
+	    
 	    
 	    public Medecin getMedecinTraitant(){
 	    	return this.medecinTraitant;
@@ -96,23 +89,34 @@ public class Personne implements Observable<Personne> {
 	    		this.pointDeVie = 0;
 	    	}
 	    	this.medecinTraitant.patients.add(this);
+	    	this.addObserver(this.medecinTraitant);
 	        this.malade = true;
 	        return this.pointDeVie;
 	    }
 	    
 	    public void ajoutMedecinTraitant(Medecin m){
-	    
+	    		
 	    		this.medecinTraitant = m;
+	    		
 
 	    }
+	    
+	    public void setPointDeVie(int p){
+	        this.pointDeVie = p;
+	        
+	        if(this.pointDeVie == 100){
+	            this.setMalade(false);
+	            this.notifyObservers();
+	        }
+	    }
 
-		public void addObserver(Observer<Medecin> observer) {
+		public void addObserver(Medecin observer) {
 			observers.add(observer);
 			
 		}
 
 		public void notifyObservers() {
-			for (Observer<Medecin> observer : observers) {
+			for (Medecin observer : observers) {
 				observer.update(this);
 			}
 		}

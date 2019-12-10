@@ -8,11 +8,13 @@ import java.util.ArrayList;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Medecin  extends Personne  implements Observer<Medecin>, Container
+public class Medecin  extends Personne  implements Observer, Container
 {
     // instance variables - replace the example below with your own
    
     protected ArrayList<Personne> patients;
+    
+    
 
     /**
      * Constructor for objects of class Medecin
@@ -41,7 +43,7 @@ public class Medecin  extends Personne  implements Observer<Medecin>, Container
 		
 	}
 	
-	public void getAllPatients(){
+	public void guerirAllPatients(){
     	for(Iterator iter = this.getIterator(); iter.hasNext();){
 	         Personne p = (Personne) iter.next();
 	         this.guerir(p, 100-p.getPointDeVie()); //remet les points de vie a 100 (guerir)

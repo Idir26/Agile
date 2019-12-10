@@ -2,6 +2,10 @@ package blueJ;
 
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +44,7 @@ public class TestPersonne
     private Personne patient2;
     private Medecin medecin1;
 
+
     // Définissez ici les variables d'instance nécessaires à vos engagements;
     // Vous pouvez également les saisir automatiquement du présentoir
     // à l'aide du menu contextuel "Présentoir --> Engagements".
@@ -73,7 +78,9 @@ public class TestPersonne
         patient1 = new Personne("Harb", "Cedric");
         medecin1 = new Medecin("Messali", "Nassim");
         
-   
+        patient1.ajoutMedecinTraitant(medecin1);
+        patient2.ajoutMedecinTraitant(medecin1);
+        
 
     }
 
@@ -116,6 +123,26 @@ public class TestPersonne
         assertEquals(90, patient2.tomberMalade(10));
     }
     
-   
+    @Test 
+    public void testAddObserver(){
+ 	   
+    	patient1.tomberMalade(20); //80 points de vie restants
+ 		
+ 		assertEquals(true, patient1.observers.contains(medecin1));
+ 		assertEquals(false,patient2.observers.contains(medecin1));  	
+        
+    }
+    
+    @Test 
+    public void testNotifyObservers(){
+    	
+    	patient1.tomberMalade(20); 
+    	patient2.tomberMalade(10);
+    	medecin1.guerir(patient1, 20);
+    	assertEquals(false, medecin1.patients.contains(patient1));
+    	assertEquals(true, medecin1.patients.contains(patient2));
+    	
+    	
+    }
 }
 

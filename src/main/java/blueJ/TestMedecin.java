@@ -16,8 +16,10 @@ import org.junit.Test;
  */
 public class TestMedecin
 {
-    private Personne patient1;
-    private Medecin medecin1;
+    private Personne patientUn;
+    private Personne patientDeux;
+    private Personne patientTrois;
+    private Medecin medecinUn;
 
     /**
      * Default constructor for test class MedecinTest
@@ -34,8 +36,20 @@ public class TestMedecin
     @Before
     public void setUp()
     {
-        patient1 = new Personne("Harb", "Cedric");
-        medecin1 = new Medecin("Messali", "Nassim");
+    	patientUn = new Personne("Harb", "Cedric");
+    	patientDeux = new Personne("Houmel", "Idir");
+    	patientTrois = new Personne("Simonian", "Charly");
+    	medecinUn = new Medecin("Messali", "Nassim");
+        
+        patientUn.ajoutMedecinTraitant(medecinUn);
+        patientDeux.ajoutMedecinTraitant(medecinUn);
+        patientTrois.ajoutMedecinTraitant(medecinUn);
+        
+        medecinUn.ajoutPatient(patientUn);
+        medecinUn.ajoutPatient(patientDeux);
+        medecinUn.ajoutPatient(patientTrois);
+       
+       
     }
 
     /**
@@ -51,8 +65,31 @@ public class TestMedecin
     @Test
     public void testGuerir()
     {
-        assertEquals(90, patient1.tomberMalade(10));
-        assertEquals(100, medecin1.guerir(patient1, 10));
+        assertEquals(90, patientUn.tomberMalade(10));
+        assertEquals(100, medecinUn.guerir(patientUn, 10));
     }
+    
+   @Test
+    public void testGuerirAllPatients(){
+	   patientUn.tomberMalade(20); //80 points de vie restants
+	   patientDeux.tomberMalade(30); //60 points de vie restants
+	   patientTrois.tomberMalade(10); //90 points de vie restants
+    	
+    	
+    	
+    	
+	   medecinUn.guerirAllPatients();	//devrait remettre tous les points de vie a 100
+    	
+    	
+    	assertEquals(100, patientUn.getPointDeVie());
+    	assertEquals(100, patientDeux.getPointDeVie());
+    	assertEquals(100, patientTrois.getPointDeVie());
+    
+    	
+    }
+   
+
+   
 }
+
 

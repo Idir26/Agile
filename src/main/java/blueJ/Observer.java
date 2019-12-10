@@ -1,6 +1,6 @@
 package blueJ;
 
 @SuppressWarnings("hiding")
-public interface Observer<Medecin> {
+public interface Observer {
     public void update(Personne personne);
 }
