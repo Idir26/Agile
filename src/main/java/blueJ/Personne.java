@@ -10,25 +10,41 @@ public class Personne implements Observable<Personne> {
 	    private int pointDeVie = 100;
 	    private boolean malade = false;
 	    private Medecin medecinTraitant;
-	    protected List<Medecin> observers = new ArrayList<Medecin>();
+	    private int age ;
+	    private List<Medecin> observers = new ArrayList<Medecin>();
 	    
-	    /**
+	   
+
+		/**
 	     * Constructeur d'objets de classe Personne
 	     */
-	    public Personne(Voiture voiture, String nom, String prenom)
+	    public Personne(Voiture voiture, String nom, String prenom, int age)
 	    {
 	        // initialisation des variables d'instance
 	    	this.nom = nom;
 	        this.prenom = prenom;
 	        this.voiture = voiture;
 	        voiture.setConducteur(this);
+	        this.age=age;
 	    }
 	    
-	    public Personne(String nom, String prenom)
+	    public Personne(String nom, String prenom, int age)
 	    {
 	        // initialisation des variables d'instance
 	    	this.nom = nom;
 	        this.prenom = prenom;
+	        this.age=age;
+	    }
+	    
+	    public GuerirStrategy getStrategie () {
+	    	GuerirStrategy s;
+	    
+	    	if (this.age<50) {
+	    		s = new GuerirJeune();
+	    	}else {
+	    		s = new GuerirVieux();
+	    	}
+	    	return s ;
 	    }
 
 	    public float faireLePlein()
@@ -71,7 +87,11 @@ public class Personne implements Observable<Personne> {
 	        return this.pointDeVie;
 	    }
 	    
-	    
+		public boolean getMalade(){
+		      return this.malade ;
+		      
+		   }
+
 	    
 	    public Medecin getMedecinTraitant(){
 	    	return this.medecinTraitant;
@@ -88,7 +108,7 @@ public class Personne implements Observable<Personne> {
 	    	}else{
 	    		this.pointDeVie = 0;
 	    	}
-	    	this.medecinTraitant.patients.add(this);
+	    	this.medecinTraitant.ajoutPatient(this);
 	    	this.addObserver(this.medecinTraitant);
 	        this.malade = true;
 	        return this.pointDeVie;
@@ -120,6 +140,11 @@ public class Personne implements Observable<Personne> {
 				observer.update(this);
 			}
 		}
+		
+		 public List<Medecin> getObservers() {
+				return observers;
+			}
+		
 			
 		}
 

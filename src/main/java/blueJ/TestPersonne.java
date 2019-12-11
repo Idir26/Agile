@@ -38,6 +38,7 @@ public class TestPersonne
 {
     private Voiture clio;
     private Voiture ferrari;
+    private Voiture lambo;
     private Personne idir;
     private Personne charly;
     private Personne patient1;
@@ -68,16 +69,21 @@ public class TestPersonne
     @Before
     public void setUp() // throws java.lang.Exception
     {
-        clio = new Voiture(55);
-        idir = new Personne(clio, "idir", "houmel");
+    	
+    	lambo = new Voiture(65);
+    	clio = new Voiture(55);
+        idir = new Personne(clio, "idir", "houmel",20);
+        
         
         ferrari = new Voiture(20);
-        charly = new Personne(ferrari, "charly", "simonian");
+        charly = new Personne(ferrari, "charly", "simonian",22);
         
-        patient2 = new Personne("c", "c");
-        patient1 = new Personne("Harb", "Cedric");
-        medecin1 = new Medecin("Messali", "Nassim");
+        patient2 = new Personne("c", "c",22);
+        patient1 = new Personne("Harb", "Cedric",22);
+        medecin1 = new Medecin("Messali", "Nassim",21);
         
+        idir.ajoutMedecinTraitant(medecin1);
+        charly.ajoutMedecinTraitant(medecin1);
         patient1.ajoutMedecinTraitant(medecin1);
         patient2.ajoutMedecinTraitant(medecin1);
         
@@ -94,6 +100,62 @@ public class TestPersonne
     {
         //Libérez ici les ressources engagées par setUp()
     }
+    
+    
+    @Test 
+    public void testGetVoiture() {
+    	assertEquals(clio, idir.getVoiture());
+    	assertEquals(ferrari, charly.getVoiture());
+    }
+    
+    @Test 
+    public void testGetPointDeVie() {
+    	assertEquals(100, idir.getPointDeVie());
+    	idir.tomberMalade(20);
+    	assertEquals(80, idir.getPointDeVie());
+    }
+    
+    @Test 
+    public void testGetMalade() {
+    	assertEquals(false, charly.getMalade());
+    	charly.tomberMalade(50);
+    	assertEquals(true, charly.getMalade());
+    }
+    
+    @Test 
+    public void testGetMedecinTraitant() {
+    	assertEquals(medecin1, charly.getMedecinTraitant());
+    }
+    
+    @Test 
+    public void testSetVoiture() {
+    	assertEquals(clio, idir.getVoiture());
+    	idir.setVoiture(lambo);
+    	assertEquals(lambo, idir.getVoiture());
+    	
+    }
+    
+    @Test 
+    public void testSetMalade() {
+    	assertEquals(false, idir.getMalade());
+    	idir.setMalade(true);
+    	assertEquals(true, idir.getMalade());
+    	
+    }
+    
+    @Test 
+    public void testSetPointDeVie() {
+    	idir.setPointDeVie(10);
+    	assertEquals(10, idir.getPointDeVie());
+    	
+    }
+    
+    @Test 
+    public void testGetObservers() {
+    	charly.tomberMalade(20);
+    	assertEquals(true, charly.getObservers().contains(medecin1));
+    }
+    
     @Test
     public void proprietaireTest()
     {
@@ -128,8 +190,8 @@ public class TestPersonne
  	   
     	patient1.tomberMalade(20); //80 points de vie restants
  		
- 		assertEquals(true, patient1.observers.contains(medecin1));
- 		assertEquals(false,patient2.observers.contains(medecin1));  	
+ 		assertEquals(true, patient1.getObservers().contains(medecin1));
+ 		assertEquals(false,patient2.getObservers().contains(medecin1));  	
         
     }
     
@@ -138,11 +200,17 @@ public class TestPersonne
     	
     	patient1.tomberMalade(20); 
     	patient2.tomberMalade(10);
-    	medecin1.guerir(patient1, 20);
-    	assertEquals(false, medecin1.patients.contains(patient1));
-    	assertEquals(true, medecin1.patients.contains(patient2));
+    	medecin1.guerir(patient1, patient1.getStrategie());
+    	assertEquals(false, medecin1.getPatients().contains(patient1));
+    	assertEquals(true, medecin1.getPatients().contains(patient2));
     	
     	
     }
+    
+    
+   
+    
+
+
 }
 

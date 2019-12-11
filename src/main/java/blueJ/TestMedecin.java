@@ -36,10 +36,10 @@ public class TestMedecin
     @Before
     public void setUp()
     {
-    	patientUn = new Personne("Harb", "Cedric");
-    	patientDeux = new Personne("Houmel", "Idir");
-    	patientTrois = new Personne("Simonian", "Charly");
-    	medecinUn = new Medecin("Messali", "Nassim");
+    	patientUn = new Personne("Harb", "Cedric",22);
+    	patientDeux = new Personne("Houmel", "Idir",80);
+    	patientTrois = new Personne("Simonian", "Charly",22);
+    	medecinUn = new Medecin("Messali", "Nassim" , 22);
         
         patientUn.ajoutMedecinTraitant(medecinUn);
         patientDeux.ajoutMedecinTraitant(medecinUn);
@@ -48,7 +48,6 @@ public class TestMedecin
         medecinUn.ajoutPatient(patientUn);
         medecinUn.ajoutPatient(patientDeux);
         medecinUn.ajoutPatient(patientTrois);
-       
        
     }
 
@@ -66,25 +65,24 @@ public class TestMedecin
     public void testGuerir()
     {
         assertEquals(90, patientUn.tomberMalade(10));
-        assertEquals(100, medecinUn.guerir(patientUn, 10));
+        assertEquals(100, medecinUn.guerir(patientUn, patientUn.getStrategie()));
     }
     
    @Test
     public void testGuerirAllPatients(){
 	   patientUn.tomberMalade(20); //80 points de vie restants
-	   patientDeux.tomberMalade(30); //60 points de vie restants
-	   patientTrois.tomberMalade(10); //90 points de vie restants
+	   int n2 =  patientDeux.tomberMalade(50); //60 points de vie restants
+	   int n3 = patientTrois.tomberMalade(10); //90 points de vie restants
     	
-    	
-    	
-    	
-	   medecinUn.guerirAllPatients();	//devrait remettre tous les points de vie a 100
-    	
+	   	//devrait remettre tous les points de vie a 100
+	    medecinUn.guerirAllPatients();
     	
     	assertEquals(100, patientUn.getPointDeVie());
-    	assertEquals(100, patientDeux.getPointDeVie());
+    	assertEquals(70, patientDeux.getPointDeVie());
     	assertEquals(100, patientTrois.getPointDeVie());
-    
+    	
+    	
+   
     	
     }
    

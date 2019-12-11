@@ -17,27 +17,21 @@
 ## (Comments)
 #Sample Feature Definition Template
 @tag
-Feature: En tant que personne necessitant une prise en charge medicale
-Je veux etre notifie du fait que je suis gueri
-Afin de pouvoir rassurer mes proches
+Feature: Notifier Guerison
+En tant que medecin
+Je veux etre notifie du fait qu'une personne necessitant des soins est reellement guerie
+Afin de pouvoir l'enlever de la liste des patients a traiter
 
   @tag1
-  Scenario outline: Title of your scenario
-    Given I want to write a step with precondition
-    And some other precondition
-    When I complete action
-    And some other action
-    And yet another action
-    Then I validate the outcomes
-    And check more outcomes
-
-  @tag2
-  Scenario Outline: Title of your scenario outline
-    Given I want to write a step with <name>
-    When I check for the <value> in step
-    Then I verify the <status> in step
-
+  Scenario Outline: Guerison personne et notification medecin
+    Given l <age> de la personne
+    When elle tombe malade avec des <points_maladie> a enlever
+    And  je la gueris
+    Then je suis notifie de sa guerison et elle ne se trouve plus dans ma liste de patient
+    
+    
     Examples: 
-      | name  | value | status  |
-      | name1 |     5 | success |
-      | name2 |     7 | Fail    |
+      | age|  points_maladie       |       |
+      | 50 |        20    				 | false |
+      | 20 |        30             | false |
+

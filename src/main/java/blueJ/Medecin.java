@@ -12,25 +12,27 @@ public class Medecin  extends Personne  implements Observer, Container
 {
     // instance variables - replace the example below with your own
    
-    protected ArrayList<Personne> patients;
+    private ArrayList<Personne> patients = new ArrayList<Personne>();
     
     
 
-    /**
+   
+
+	/**
      * Constructor for objects of class Medecin
      */
-    public Medecin(String nom, String prenom)
+    public Medecin(String nom, String prenom, int age)
     {
         // initialise instance variables
-    	super(nom,prenom);
-        patients = new ArrayList<Personne>();
+    	super(nom,prenom,age);
+        
     }
 
-    public int guerir(Personne patient, int pointDeVie){
-        if(patient.getPointDeVie() + pointDeVie <= 100){
-            patient.setPointDeVie(patient.getPointDeVie() + pointDeVie);
-        }
-        
+    public int guerir(Personne patient, GuerirStrategy g ){
+        if(patient.getPointDeVie() + g.PointDeVieAAjouter()<= 100){
+            patient.setPointDeVie(patient.getPointDeVie() + g.PointDeVieAAjouter());
+        }else {patient.setPointDeVie(100) ;}
+      
         return patient.getPointDeVie();
     }
     
@@ -46,10 +48,12 @@ public class Medecin  extends Personne  implements Observer, Container
 	public void guerirAllPatients(){
     	for(Iterator iter = this.getIterator(); iter.hasNext();){
 	         Personne p = (Personne) iter.next();
-	         this.guerir(p, 100-p.getPointDeVie()); //remet les points de vie a 100 (guerir)
+	         this.guerir(p, p.getStrategie()); //remet les points de vie a 100 (guerir)
 	     } 
     }
-    
+	
+	
+	
     public Iterator getIterator() {
        return new NameIterator();
     }
@@ -57,7 +61,8 @@ public class Medecin  extends Personne  implements Observer, Container
     private class NameIterator implements Iterator {
 
        int index;
-
+       
+       
        public boolean hasNext() {
        
           if(index < patients.size()){
@@ -74,4 +79,10 @@ public class Medecin  extends Personne  implements Observer, Container
           }
           return null;
        }		
-    }}
+    }
+    
+    public ArrayList<Personne> getPatients() {
+		return patients;
+	}
+
+}

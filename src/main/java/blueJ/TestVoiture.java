@@ -39,6 +39,9 @@ public class TestVoiture
     // du présentoir (les objets sans constructeur, comme int, float, etc.).
     protected double fValeur1;
     protected double fValeur2;
+    private Voiture ferrari;
+    private Medecin medecin1;
+    private Personne charly;
 
     /**
      * Constructeur de la classe-test TestVoiture
@@ -58,6 +61,9 @@ public class TestVoiture
         // Initialisez ici vos engagements
         fValeur1= 2.0;
         fValeur2= 3.0;
+        medecin1 = new Medecin("Messali", "Nassim",22);
+        ferrari = new Voiture(20);
+        charly = new Personne(ferrari, "charly", "simonian",23);
     }
 
     /**
@@ -78,5 +84,19 @@ public class TestVoiture
         Voiture myCar = new Voiture(60);
         assertEquals(null, myCar.getConducteur());
     }
+    
+    @Test
+    public void testAccident()
+    {
+    
+        ferrari.accident(30, medecin1);
+        assertEquals(70,ferrari.getConducteur().getPointDeVie() );
+        assertEquals(true,ferrari.getConducteur().getMalade() );
+        assertEquals(true, medecin1.getPatients().contains(charly) );
+        assertEquals(medecin1, charly.getMedecinTraitant());
+
+        
+    }
+
 }
 

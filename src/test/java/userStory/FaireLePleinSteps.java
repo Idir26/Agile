@@ -16,7 +16,7 @@ public class FaireLePleinSteps {
 	@Given("{int} de carburant")
 	public void de_carburant(Integer int1) {
 		this.voiture = new Voiture(int1);
-		this.conducteur = new Personne(this.voiture, "toto", "titi");
+		this.conducteur = new Personne(this.voiture, "toto", "titi",20);
 	  
 	}
 

@@ -52,4 +52,13 @@ public class Voiture
     {
         return (this.qtCarburantRestant+quantite<= this.capacite && quantite >= 0);
     }
+    
+    public void accident(int pVie, Medecin m ) {
+        int n = this.conducteur.getPointDeVie()-pVie ;
+        this.conducteur.setPointDeVie(n);
+        this.conducteur.setMalade(true);
+        m.ajoutPatient(this.conducteur);
+        this.conducteur.ajoutMedecinTraitant(m);
+        }
+
 }
