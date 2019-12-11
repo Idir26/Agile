@@ -37,9 +37,9 @@ public class TestVoiture
     // à l'aide du menu contextuel "Présentoir --> Engagements".
     // Notez cependant que ce dernier ne peut saisir les objets primitifs
     // du présentoir (les objets sans constructeur, comme int, float, etc.).
-    protected double fValeur1;
-    protected double fValeur2;
+
     private Voiture ferrari;
+    private Voiture lambo;
     private Medecin medecin1;
     private Personne charly;
 
@@ -59,10 +59,9 @@ public class TestVoiture
     public void setUp() // throws java.lang.Exception
     {
         // Initialisez ici vos engagements
-        fValeur1= 2.0;
-        fValeur2= 3.0;
         medecin1 = new Medecin("Messali", "Nassim",22);
         ferrari = new Voiture(20);
+        lambo = new Voiture(30);
         charly = new Personne(ferrari, "charly", "simonian",23);
     }
 
@@ -75,6 +74,42 @@ public class TestVoiture
     public void tearDown() // throws java.lang.Exception
     {
         //Libérez ici les ressources engagées par setUp()
+    }
+    
+    
+    @Test 
+    public void testGetConducteur() {
+    	assertEquals(charly, ferrari.getConducteur());
+    	assertEquals(null, lambo.getConducteur());
+    }
+    
+    @Test 
+    public void testGetCapacite() {
+    	assertEquals(100, ferrari.getCapacite(),0.1);
+    	assertEquals(100, lambo.getCapacite(),0.1);
+    }
+    
+    @Test 
+    public void testGetQtCarburantRestant() {
+    	assertEquals(20, ferrari.getQtCarburantRestant(),0.1);
+    	assertEquals(30, lambo.getQtCarburantRestant(),0.1);
+    }
+
+    
+    @Test 
+    public void testSetConducteur() {
+    	assertEquals(charly, ferrari.getConducteur());
+    	ferrari.setConducteur(medecin1);
+    	assertEquals(medecin1, ferrari.getConducteur());
+    	
+    }
+    
+    @Test 
+    public void testSetQtCarburantRestant() {
+    	assertEquals(30, lambo.getQtCarburantRestant(),0.1);
+    	lambo.setQtCarburantRestant(25);
+    	assertEquals(25, lambo.getQtCarburantRestant(),0.1);
+    	
     }
 
     @Test

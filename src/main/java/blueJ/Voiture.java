@@ -3,7 +3,7 @@ package blueJ;
 public class Voiture
 {
     // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private float capacite;
+    private final float capacite = 100;
     private float qtCarburantRestant;
     private Personne conducteur;
    
@@ -13,7 +13,6 @@ public class Voiture
     public Voiture(float qtCarburantRestant)
     {
         // initialisation des variables d'instance
-        this.capacite = 100;
         this.qtCarburantRestant =  (qtCarburantRestant >=0 && qtCarburantRestant <= this.capacite) ?  qtCarburantRestant : 0;
         this.conducteur = null;
         
@@ -26,18 +25,11 @@ public class Voiture
 	public Personne getConducteur(){
         return this.conducteur;
     }
-    
-    public void setCapacite(Personne conducteur){
-         this.conducteur = conducteur;
-    }
-    
+   
     public float getCapacite(){
         return this.capacite;
     }
     
-    public void setCapacite(float capacite){
-         this.capacite = capacite;
-    }
     
     public float getQtCarburantRestant(){
         return this.qtCarburantRestant;

@@ -31,7 +31,7 @@ Afin de pouvoir l'enlever de la liste des patients a traiter
     
     
     Examples: 
-      | age|  points_maladie       |       |
-      | 50 |        20    				 | false |
-      | 20 |        30             | false |
+      | age|  points_maladie       |
+      | 50 |        20    				 |
+      | 20 |        30             |
 

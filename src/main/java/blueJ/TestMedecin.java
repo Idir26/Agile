@@ -3,6 +3,7 @@ package blueJ;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,9 +46,7 @@ public class TestMedecin
         patientDeux.ajoutMedecinTraitant(medecinUn);
         patientTrois.ajoutMedecinTraitant(medecinUn);
         
-        medecinUn.ajoutPatient(patientUn);
-        medecinUn.ajoutPatient(patientDeux);
-        medecinUn.ajoutPatient(patientTrois);
+       
        
     }
 
@@ -68,23 +67,22 @@ public class TestMedecin
         assertEquals(100, medecinUn.guerir(patientUn, patientUn.getStrategie()));
     }
     
-   @Test
-    public void testGuerirAllPatients(){
-	   patientUn.tomberMalade(20); //80 points de vie restants
-	   int n2 =  patientDeux.tomberMalade(50); //60 points de vie restants
-	   int n3 = patientTrois.tomberMalade(10); //90 points de vie restants
-    	
-	   	//devrait remettre tous les points de vie a 100
-	    medecinUn.guerirAllPatients();
-    	
-    	assertEquals(100, patientUn.getPointDeVie());
-    	assertEquals(70, patientDeux.getPointDeVie());
-    	assertEquals(100, patientTrois.getPointDeVie());
-    	
-    	
-   
-    	
+    @Test
+    public void testGetPatients()
+    {
+    	ArrayList<Personne> patients1 = new ArrayList<Personne>();
+    	patients1.add(patientUn);
+    	medecinUn.ajoutPatient(patientUn);
+        assertEquals(patients1, medecinUn.getPatients());
     }
+   
+    @Test
+    public void testAjoutPatient(){
+    	
+    	medecinUn.ajoutPatient(patientTrois);
+        assertEquals(true, medecinUn.getPatients().contains(patientTrois));
+    }
+    
    
 
    
